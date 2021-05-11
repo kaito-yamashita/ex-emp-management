@@ -40,7 +40,7 @@
 					<p class="navbar-text navbar-right">
 						<span th:text="${session.administratorName + 'さん'}">山田さん</span>こんにちは！
 						&nbsp;&nbsp;&nbsp;
-						<a href="../administrator/login.html" class="navbar-link">ログアウト</a>
+						<a href="../administrator/login.html" th:href="@{/logout}" class="navbar-link">ログアウト</a>
 					</p>
 				</div>
 				<!-- /.navbar-collapse -->
@@ -64,10 +64,12 @@
 				
 <!-- ここから上を編集する必要はありません -->
 
-					<form method="post" action="list.html" th:object="${employee}">
-						<fieldset>
+					<form method="post" action="list.html"
+						th:action="@{/employee/update}" th:object="${updateEmployeeForm}">
+						<div th:object="${employee}">
+						  <fieldset>
 							<legend>従業員情報</legend>
-							<table class="table table-striped">
+							 <table class="table table-striped">
 							  <tr>
 							    <th nowrap>
 							      従業員名
@@ -81,7 +83,7 @@
 							      写真
 							    </th>
 							    <td>
-							      <img th:src="@{/img/{image}(image=${image})}">
+							      <img th:src="@{/img/{image}(image=*{image})}">
 							    </td>
 							  </tr>
 							  <tr>
@@ -162,8 +164,9 @@
 							    </td>
 							  </tr>
 							</table>
-							<button type="submit" class="btn btn-primary">更新</button>
+						  <button type="submit" class="btn btn-primary">更新</button>
 						</fieldset>
+					  </div>
 					</form>
 
 
